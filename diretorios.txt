@@ -1,0 +1,7 @@
+Documentos/Docs
+Documentos/
+Imagens
+Vídeos
+Músicas
+Documentos/Estudos
+Documentos/Estudos/IFCE
