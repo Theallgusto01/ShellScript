@@ -17,7 +17,7 @@
 
 # O Script deve executar diáriamente para organizar a pasta de Dowloads, e, caso não exista, criar o diretório#
 
-#!/bin/zsh
+#!/bin/bash
 
 organizar=$1
 
@@ -27,6 +27,13 @@ function mostrar_extensao(){
  echo $ext
 }
 
+remover_espacos(){
+
+  
+  echo $(echo $1 | tr -d ' ')
+
+
+}
 
 preparar(){
 
@@ -60,8 +67,10 @@ organizar(){
 
      if [ ! -d "$arquivo" ]
      then
+
+      nome_arquivo_sem_espacos=$(remover_espacos "$arquivo")
      
-      case $(mostrar_extensao $arquivo) in
+      case $(mostrar_extensao $nome_arquivo_sem_espacos) in
         'pdf' | 'docx' | 'epub' | 'txt') mv "$arquivo" ${diretorios[0]};;
         'zip' |  'tar' | 'gz')           mv "$arquivo" ${diretorios[1]};;
         'png' | 'jpg' | 'jpeg' | 'gif')  mv "$arquivo" ${diretorios[2]};;
@@ -71,9 +80,8 @@ organizar(){
         'jar' | 'sh' | 'deb' | 'py' | 'run' | 'apk' | 'c')  mv "$arquivo" ${diretorios[8]};;
         *)  echo "Sem lugar para o arquivo $arquivo -> Extensão: $(mostrar_extensao $arquivo) :(";;
         esac
-
-     fi
      
+     fi    
   done
  }
    
